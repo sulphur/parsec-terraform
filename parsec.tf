@@ -16,6 +16,10 @@ variable "aws_subnet" {
   type = "string"
 }
 
+variable "my_ip" {
+  type = "string"
+}
+
 # Template
 
 provider "aws" {
@@ -26,7 +30,7 @@ data "aws_ami" "parsec" {
   most_recent = true
   filter {
     name = "name"
-    values = ["ParsecRun-3"]
+    values = ["parsec-ws2012-1"]
   }
 }
 
@@ -39,35 +43,35 @@ resource "aws_security_group" "parsec" {
       from_port = 8000
       to_port = 8004
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${var.my_ip}"]
   }
 
   ingress {
       from_port = 5900
       to_port = 5900
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${var.my_ip}"]
   }
 
   ingress {
       from_port = 5900
       to_port = 5900
       protocol = "udp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${var.my_ip}"]
   }
 
   ingress {
       from_port = 8000
       to_port = 8004
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${var.my_ip}"]
   }
 
   ingress {
       from_port = 8000
       to_port = 8004
       protocol = "udp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${var.my_ip}"]
   }
 
   egress {

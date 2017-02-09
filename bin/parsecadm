@@ -47,6 +47,7 @@ plan)
   TF_VAR_aws_subnet=$subnet_id \
   TF_VAR_aws_region=$aws_region \
   TF_VAR_parsec_authcode=$3 \
+  TF_VAR_my_ip=$4\
   terraform plan
 
   echo "To proceed, run \"parsecadm apply <aws region> <parsec token>\""
